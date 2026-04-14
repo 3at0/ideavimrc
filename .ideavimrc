@@ -1,0 +1,278 @@
+" Leader key
+let mapleader = " "
+
+" Text wrapping
+set wrap
+
+" Line numbering
+set number
+set relativenumber
+
+" Tab settings
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+" Indentation
+set autoindent
+set smartindent
+set smarttab
+
+" Scroll settings
+set scrolloff=1
+
+" Sign column
+set signcolumn=yes
+
+" Fold column
+set foldcolumn=1
+
+" Search
+set hlsearch
+set incsearch
+set ignorecase
+set smartcase
+
+" Better j/k for wrapped lines
+nnoremap j gj
+nnoremap k gk
+xnoremap j gj
+xnoremap k gk
+
+" Insert mode navigation with Ctrl-hjkl
+inoremap <C-h> <Left>
+inoremap <C-j> <Down>
+inoremap <C-k> <Up>
+inoremap <C-l> <Right>
+
+" Window navigation with Ctrl-hjkl (native in IDEAVim via <C-w>)
+" Center after scroll
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+
+" Move 10 lines up/down with Alt+Shift+J/K
+nnoremap <M-S-J> 10j
+vnoremap <M-S-J> 10j
+nnoremap <M-S-K> 10k
+vnoremap <M-S-K> 10k
+
+" Move to beginning/end of line with Alt+Shift+H/L
+nnoremap <M-S-H> ^
+nnoremap <M-S-L> $
+
+" System clipboard yank/paste with Alt+Shift+Y/P
+nnoremap <M-S-Y> "+y
+vnoremap <M-S-Y> "+y
+nnoremap <M-S-P> "+p
+vnoremap <M-S-P> "+p
+
+" Save with Ctrl-s
+nnoremap <C-s> :w<CR>
+inoremap <C-s> <C-o>:w<CR>
+vnoremap <C-s> <esc>:w<CR>
+
+" Search word under cursor (like <leader>sw)
+nnoremap <leader>sw *<CR>
+nnoremap <leader>sW #<CR>
+
+" Search navigation centered
+nnoremap n nzz
+nnoremap N Nzz
+
+" Escape clears search highlight
+inoremap <esc> <esc>:noh<CR>
+nnoremap <esc> :noh<CR>
+
+" ============================================
+" Buffer/Tab navigation
+" ============================================
+nnoremap <S-L> :action nextTab
+nnoremap <S-H> :action previousTab
+nnoremap <M-S-W> :action CloseContent
+nnoremap [b :action previousTab
+nnoremap ]b :action nextTab
+nnoremap <leader><tab>l :action lastTab
+nnoremap <leader><tab>f :action firstTab
+
+" Switch to other tab
+nnoremap <leader>` :action lastTab<CR>
+
+" ============================================
+" Window/Split management
+" ============================================
+nnoremap <leader>- :split<CR>
+nnoremap <leader>\| :vsplit<CR>
+nnoremap <leader>wd :action CloseAllEditors<CR>
+nnoremap <leader>wm :action MaximizeEditorInGroup
+
+" ============================================
+" LSP actions (using IDE actions)
+" ============================================
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action FindUsages<CR>
+nnoremap gR :action RenameElement<CR>
+nnoremap K :action QuickImplementations<CR>
+nnoremap <leader>ca :action Generate<CR>
+nnoremap <leader>cf :action ReformatCode<CR>
+nnoremap <leader>cF :action ReformatCode<CR>
+nnoremap <leader>cd :action ShowErrorDescription<CR>
+
+" ============================================
+" Navigation: Next/Previous with bracket keys
+" ============================================
+" Methods/Functions
+nnoremap [m :action MethodUp<CR>
+nnoremap ]m :action MethodDown<CR>
+nnoremap [M :action PreviousMethod<CR>
+nnoremap ]M :action NextMethod<CR>
+
+" Errors/Warnings
+nnoremap [e :action GotoPreviousError<CR>
+nnoremap ]e :action GotoNextError<CR>
+nnoremap [w :action GotoPreviousWarning<CR>
+nnoremap ]w :action GotoNextWarning<CR>
+
+" Search matches
+nnoremap [/ :action FindPrevious<CR>
+nnoremap ]/ :action FindNext<CR>
+
+" Bookmarks
+nnoremap [b :action GotoPreviousBookmark<CR>
+nnoremap ]b :action GotoNextBookmark<CR>
+
+" Change list (LSP quickfix)
+nnoremap [c :action PreviousChange<CR>
+nnoremap ]c :action NextChange<CR>
+
+" Todo comments
+nnoremap [t :action GotoTodo<CR>
+nnoremap ]t :action GotoTodo<CR>
+
+" Go to implementation
+nnoremap gi :action GoToImplementation<CR>
+
+" Find references in new tab
+nnoremap <leader>uT :action ToggleLineBreakpoint<CR>
+nnoremap <leader>db :action ToggleLineBreakpoint<CR>
+
+" ============================================
+" Search and navigation
+" ============================================
+nnoremap <leader>sf :action SearchEverywhere<CR>
+nnoremap <leader>sg :action FindInPath<CR>
+nnoremap <leader>fg :action FindInPath<CR>
+nnoremap <leader>sG :action FindInPath<CR>
+nnoremap <leader>/ :action Find<CR>
+nnoremap <leader>sh :action Help<CR>
+nnoremap <leader>sk :action Keymap<CR>
+nnoremap <leader>sm :action ShowBookmarks<CR>
+
+" File tree
+nnoremap <leader>e :action RevealInFileExplorer<CR>
+nnoremap <leader>ff :action GotoFile<CR>
+nnoremap <leader>fn :action NewFile<CR>
+
+" ============================================
+" Git actions (IDE VCS integration)
+" ============================================
+nnoremap <leader>gg :action CheckoutProject<br>
+nnoremap <leader>gc :action Commit<CR>
+nnoremap <leader>gC :action Git.Push<CR>
+nnoremap <leader>gp :action Git.Pull<CR>
+nnoremap <leader>gb :action Git.Blame<CR>
+nnoremap <leader>gd :action Git.ShowDiff<CR>
+nnoremap <leader>gD :action CompareFiles<CR>
+
+" ============================================
+" Debugging (IDE built-in debugger)
+" ============================================
+nnoremap <F5> :action Debug<br>
+nnoremap <F6> :action ToggleLineBreakpoint<CR>
+nnoremap <F7> :action StepInto<CR>
+nnoremap <F8> :action StepOver<CR>
+nnoremap <F9> :action StepOut<CR>
+nnoremap <F10> :action Rerun<br>
+nnoremap <F12> :action Stop<CR>
+
+" ============================================
+" Code runner (IDE run configurations)
+" ============================================
+nnoremap <leader>rr :action Run<CR>
+nnoremap <leader>rd :action Debug<CR>
+nnoremap <leader>rt :action RunAllTestsInDirectory<CR>
+nnoremap <leader>rm :action Run Maven Goal<CR>
+nnoremap <leader>rq :action Stop<CR>
+
+" ============================================
+" Refactoring
+" ============================================
+nnoremap <leader>re :action Refactorings.QuickListPopupAction<CR>
+nnoremap <leader>rc :action ExtractMethod<CR>
+nnoremap <leader>ri :action IntroduceVariable<CR>
+nnoremap <leader>rf :action Inline<br>
+
+" ============================================
+" UI toggles
+" ============================================
+nnoremap <leader>ul :action ToggleLineNumbers<CR>
+nnoremap <leader>uL :action ToggleRelativeLineNumbers<CR>
+nnoremap <leader>uw :action ToggleWordWrap<CR>
+nnoremap <leader>uh :action ToggleRenderedDocumentation<CR>
+
+" ============================================
+" Terminal (IDE terminal)
+" ============================================
+nnoremap <leader>tt :action Terminal.OpenInTerminal<CR>
+nnoremap <leader>tv :action NewVerticalTerminalTab<CR>
+nnoremap <leader>th :action NewHorizontalTerminalTab<CR>
+
+" ============================================
+" Quick fixes and diagnostics
+" ============================================
+nnoremap <leader>xx :action InspectCode<CR>
+nnoremap <leader>xX :action Errors<CR>
+nnoremap [q :action GotoPreviousError<CR>
+nnoremap ]q :action GotoNextError<CR>
+nnoremap <leader>xq :action ProblemsView<CR>
+
+" ============================================
+" General IDE actions
+" ============================================
+nnoremap <leader>qq :action Exit<CR>
+nnoremap <leader>qQ :qa<CR>
+nnoremap <leader>ui :action FileStructurePopup<CR>
+nnoremap <leader>uI :action FileStructurePopup<CR>
+
+" Surround selection (requires plugins)
+xnoremap <leader>sw "vy/<C-R>=substitute(escape(@v, '/\.*$^~['), '\n', '\\n', 'g')<CR>
+\ <C-R>=b:operator_luasnip<CR>
+
+" Comment toggle (requires commentary plugin or IDEAVim with commentary)
+nnoremap gcc :action CommentByLineComment<CR>
+xnoremap gc :action CommentByLineComment<CR>
+
+" Add comment below
+nnoremap gco o<esc>V<leader>cc
+nnoremap gcO O<esc>V<leader>cc
+
+" Visual mode indenting (stay in visual after indent)
+xnoremap < <gv
+xnoremap > >gv
+
+" Undo break points (useful in IDEAVim)
+inoremap , ,<c-g>u
+inoremap . .<c-g>u
+inoremap ; ;<c-g>u
+
+" ============================================
+" Language-specific (optional, disable if unused)
+" ============================================
+" Java
+nnoremap <leader>rj :action RunClass<CR>
+nnoremap <leader>rdj :action DebugClass<CR>
+
+" Rust (if using Rust plugin)
+nnoremap <leader>rc :action CargoRun<CR>
+nnoremap <leader>rt :action CargoTest<CR>
+nnoremap <leader>rb :action CargoBuild<CR>
