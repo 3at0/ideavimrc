@@ -9,7 +9,7 @@ set number
 set relativenumber
 
 " Tab settings
-set tabstop=4
+set tabstop=5
 set shiftwidth=4
 set softtabstop=4
 set expandtab
@@ -87,8 +87,8 @@ nnoremap <esc> :noh<CR>
 " ============================================
 " Buffer/Tab navigation
 " ============================================
-nnoremap <S-L> :action nextTab<CR>
-nnoremap <S-H> :action previousTab<CR>
+nnoremap <S-L> :next tab<CR>
+nnoremap <S-H> :previous tab<CR>
 nnoremap <leader><tab>l :action lastTab
 nnoremap <leader><tab>f :action firstTab
 nnoremap <leader>bd :action CloseContent<CR>
@@ -104,6 +104,7 @@ nnoremap <leader>- :split<CR>
 nnoremap <leader>\| :vsplit<CR>
 nnoremap <leader>wd :action CloseAllEditors<CR>
 nnoremap <leader>wm :action MaximizeEditorInGroup<CR>
+nnoremap <leader>ww :action NextSplitter<CR>
 
 " ============================================
 " LSP actions (using IDE actions)
@@ -112,12 +113,18 @@ nnoremap gd :action GotoDeclaration<CR>
 nnoremap gi :action GotoImplementation<CR>
 nnoremap gt :action GotoTypeDeclaration<CR>
 nnoremap gs :action GotoSuperMethod<CR>
-nnoremap gu :action FindUsages<CR>
+nnoremap gu :action ShowUsages<CR>
 nnoremap gR :action RenameElement<CR>
 nnoremap K :action QuickImplementations<CR>
 nnoremap <leader>ca :action Generate<CR>
 nnoremap <leader>cf :action ReformatCode<CR>
 nnoremap <leader>cd :action ShowErrorDescription<CR>
+
+" ============================================
+" Navigation history (browser-style back/forward)
+" ============================================
+nnoremap <C-o> :action Back<CR>
+nnoremap <C-n> :action Forward<CR>
 
 " ============================================
 " Navigation: Next/Previous with bracket keys
@@ -153,11 +160,13 @@ nnoremap <leader>db :action ToggleLineBreakpoint<CR>
 " Search and navigation
 " ============================================
 nnoremap <leader>f<space> :action SearchEverywhere<CR>
-nnoremap <leader>ff :action GotoFile<CR>
+"nnoremap <leader>ff :action GotoFile<CR>
+nmap <Leader>ff <action>(com.mituuz.fuzzier.search.Fuzzier)
 nnoremap <leader>fa :action GotoAction<CR>
 nnoremap <leader>fc :action GotoClass<CR>
 nnoremap <leader>fs :action GotoSymbol<CR>
 nnoremap <leader>ft :action FindInPath<CR>
+nmap <Leader>fg <action>(com.mituuz.fuzzier.grep.FuzzyGrep)
 nnoremap <leader>/ :action Find<CR>
 nnoremap <leader>sm :action ShowBookmarks<CR>
 
@@ -215,6 +224,11 @@ nnoremap <leader>ul :action ToggleLineNumbers<CR>
 nnoremap <leader>uL :action ToggleRelativeLineNumbers<CR>
 nnoremap <leader>uw :action ToggleWordWrap<CR>
 nnoremap <leader>uh :action ToggleRenderedDocumentation<CR>
+
+" ============================================
+" Window layouts (opens the layout popup with type-ahead)
+" ============================================
+nnoremap <leader><F1> :action ChangeToolWindowLayout<CR>
 
 " ============================================
 " Terminal (IDE terminal)
